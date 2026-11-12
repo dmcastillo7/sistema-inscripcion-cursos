@@ -16,11 +16,11 @@ public class Inscripcion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "estudiante_id", nullable = false)
     private Estudiante estudiante;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "curso_id", nullable = false)
     private Curso curso;
 
@@ -30,12 +30,15 @@ public class Inscripcion {
     public Inscripcion() {
     }
 
-    public Long getId() {
-        return id;
+    @PrePersist
+    public void establecerFecha() {
+        if (fechaInscripcion == null) {
+            fechaInscripcion = LocalDateTime.now();
+        }
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getId() {
+        return id;
     }
 
     public Estudiante getEstudiante() {
