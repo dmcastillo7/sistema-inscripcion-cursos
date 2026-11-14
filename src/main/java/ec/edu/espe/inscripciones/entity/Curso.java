@@ -1,8 +1,10 @@
 package ec.edu.espe.inscripciones.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "cursos")
 public class Curso {
 
